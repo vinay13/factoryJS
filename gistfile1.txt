@@ -1,0 +1,95 @@
+<html> 
+<head>
+<link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css">
+
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/Chart.js/Chart.min.js"></script>
+  <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+
+  
+</script>
+</head>
+<body>
+
+<div ng-app="app" ng-controller="AppCtrl">
+
+Search : <input type="text" value="" ng-model="search" />
+  <table border=1>
+  <tr ng-repeat="da in mydata | filter : search"> 
+      <td>{{ da.id }}</td>
+      <td>{{ da.name }}</td>
+      <td><a href="" ng-click="removeName(data)">Remove</a></td>
+ </tr>
+ </table>
+
+</div>
+
+
+
+<script type="text/javascript">
+  
+var app = angular.module("app",[]);
+/*
+app.factory("game", function ($http) {
+
+   /*  var data={
+            'title': 'Tommy',
+            'language' : 'English',
+              greet: function(){
+              console.log('hello' + this.title + this.language);
+            }
+      };
+
+      
+
+  return $http.get('arbit.json');
+  
+});
+
+*/
+
+
+
+app.controller("AppCtrl",function ($scope,$http) {
+  //console.log(ab);
+  //$scope.title = $http.id;
+
+
+$http.get('arbit.json').success(function(response){
+    $scope.mydata=response;
+  });
+
+
+
+$scope.removeName = function(row){
+  $scope.mydata.splice($scope.mydata.indexOf(row),1);
+}
+});
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+//arbit.json file
+
+[
+    {"id":"1","name":"steve"},
+	{"id":"2","name":"larry"}
+
+]
+
+
+
+
+
+
+
+
+
+
